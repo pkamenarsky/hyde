@@ -1,6 +1,8 @@
-module Html where
+module Main where
 
 import List
+import Language.Haskell.Interpreter hiding (children)
+import System.Process
 
 data Template a = Template {runTemplate :: a -> Html}
 
@@ -21,7 +23,7 @@ data ColorP = ColorP Integer Integer Integer
 data Unit = Px | Pct | Pt
 
 data Property = Property Property Property | Position PositionP | Color ColorP | Width Integer Unit |
-	Height Integer Unit | Left Integer Unit | Top Integer Unit | Right Integer Unit |
+	Height Integer Unit | PLeft Integer Unit | Top Integer Unit | PRight Integer Unit |
 	Bottom Integer Unit
 data Rule = Rule [Property]
 data Css = Css [Rule]
@@ -176,9 +178,32 @@ main100 = print $
 	Position Relative &
 	Position Static
 
-main = print $
+main101 = print $
 	sdiv ! sid "container" </>
 		[sdiv ! sid "container2",
 		sdiv ! sid "uuu" ! sstyle (Position Absolute & Position Relative) </>
 			[ssite $ stitle "LALAL",
 			sperson $ Person "John" 5]]
+
+-- hint
+
+testHint :: Interpreter ()
+testHint =
+	do
+		res <- eval "1 + 1"
+		liftIO . putStrLn $ show res
+		return ()
+
+main102 = do
+	r <- runInterpreter testHint
+	case r of
+			Left err -> putStrLn $ "Error: " ++ (show err)
+			Right () -> putStrLn "Good"
+	return ()
+
+-- processes
+
+main = do
+	p <- readProcess "runhaskell" ["site.hs"] ""
+	putStrLn p
+
