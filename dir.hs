@@ -2,18 +2,28 @@ module Main where
 
 import System.Directory
 import System.Time
-import qualified Data.Set as Set
+import Data.List
 
-newtype TimeFile = TimeFile (FilePath, ClockTime)
+-- TimeFile
+
+newtype TimeFile = TimeFile {timefile :: (FilePath, ClockTime)} deriving (Show)
+
+filepath = (fst . timefile)
+filetime = (snd . timefile)
+
+instance Eq TimeFile where
+	(==) a b = filepath a == filepath b
+
+-- Difference
 
 data Difference = Difference {new :: [FilePath], removed :: [FilePath], modified :: [FilePath]} deriving (Show)
 
 difference :: [TimeFile] -> [TimeFile] -> Difference
-difference old new = let
-						oldNames = Set.fromList $ map (\(TimeFile (path, _)) -> path) old
-						newNames = Set.fromList $ map (\(TimeFile (path, _)) -> path) new
-					in Difference (diff newNames oldNames) (diff oldNames newNames) [] where
-						diff a b = Set.toList $ Set.difference a b
+difference old new =
+	Difference
+		(map filepath $ new \\ old)
+		(map filepath $ old \\ new)
+		[]
 
 getTimestamps :: FilePath -> IO [TimeFile]
 getTimestamps path = do
