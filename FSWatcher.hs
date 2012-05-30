@@ -1,4 +1,4 @@
-module Main where
+module FSWatcher (poll, Difference, new, modified, removed) where
 
 import System.Directory
 import System.Time
@@ -33,7 +33,7 @@ nullDiff (Difference new removed modified) = null new && null removed && null mo
 
 getTimestamps :: FilePath -> IO [TimeFile]
 getTimestamps path = do
-	let fpath = map ((path ++ "/")++)
+	let fpath = map ((path ++ "/") ++)
 
 	content <- getDirectoryContents path
 	files <- filterM doesFileExist $ fpath content
@@ -59,12 +59,3 @@ poll path action = do
 	files <- getTimestamps path
 	pollR path files (Difference [] [] []) action
 
--- main
-
-main = poll "." print
-
--- Tests
-
-zero = TOD 0 0
-
-prop_oldfiles = difference [TimeFile ("a", zero), TimeFile ("b", zero)] [TimeFile ("a", TOD 0 1)]
