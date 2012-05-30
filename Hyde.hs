@@ -29,8 +29,8 @@ stripSuffix suffix xs = do
 compile :: FSW.Difference -> IO ()
 compile diff = do
 	let infiles = filter (isSuffixOf suffixIn) (FSW.new diff ++ FSW.modified diff)
-	let outfiles = map ((dirOut ++) . fromJust . (stripPrefix dirIn) . 
-		(++ suffixOut) . fromJust . (stripSuffix suffixIn) . (map toLower)) infiles
+	let outfiles = map ((dirOut ++) . (map toLower) . fromJust . (stripPrefix dirIn) . 
+		(++ suffixOut) . fromJust . (stripSuffix suffixIn)) infiles
 
 	putStr "Generating markup..."
 	hFlush stdout
