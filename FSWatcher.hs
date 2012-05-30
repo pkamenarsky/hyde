@@ -6,6 +6,8 @@ import Data.List
 import Control.Monad
 import Control.Concurrent
 
+import Test.QuickCheck
+
 -- TimeFile
 
 newtype TimeFile = TimeFile {timefile :: (FilePath, ClockTime)} deriving (Show)
@@ -60,3 +62,20 @@ poll path action = do
 	action $ Difference (map filepath files) [] []
 	pollR path files (Difference [] [] []) action
 
+-- Tests
+
+instance Arbitrary ClockTime where
+	arbitrary = liftM2 TOD arbitrary arbitrary
+
+instance Arbitrary TimeFile where
+	arbitrary = do
+					name <- arbitrary
+					time <- arbitrary
+					return $ TimeFile (name, time)
+
+prop_difference :: [TimeFile] -> [TimeFile] -> Bool
+prop_difference a b = (n == o' && n' == o && m == m') where
+	a' = nub a
+	b' = nub b
+	(Difference n o m) = difference a' b'
+	(Difference n' o' m') = difference b' a'
