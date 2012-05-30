@@ -1,33 +1,42 @@
+// Layout globals
+
+$width: 500px;
+$vsplit: 210px;
+
+// Mixins
+
+@mixin centered {
+	position: absolute;
+	width: $width;
+	left: 50%;
+	margin-left: $width / -2;
+}
+
+@mixin font($size) {
+	color: #333333;
+	font-family: Helvetica Neue, Helvetica, Arial;
+	font-size: $size;
+}
+
+// Layout
+
 body {
 	margin: 0px;
 	padding: 0px;
 }
 
 #main {
-	position: absolute;
-	// background-color: #dddddd;
-	color: #333333;
-
-	font-family: Helvetica Neue;
-	font-size: 13px;
-
-	top: 200px;
-	width: 500px;
-	left: 50%;
-	margin-left: -250px;
+	@include centered;
+	top: $vsplit;
 }
 
 #menu {
-	position: absolute;
-	// background-color: #cccccc;
+	@include centered;
 
 	text-align: justify;
 
-	left: 50%;
-	margin-left: -250px;
+	top: $vsplit;
 	margin-top: -25px;
-	width: 500px;
-	top: 200px;
 	height: 25px;
 }
 
@@ -39,11 +48,9 @@ body {
 .menuitem a {
 	outline: none;
 	text-decoration: none;
-	color: #333333;
 
-	font-family: Helvetica Neue;
+	@include font(13px);
 	font-weight: bold;
-	font-size: 13px;
 }
 
 #stretcher {
@@ -56,43 +63,34 @@ body {
 	background-color: #dddddd;
 
 	height: 1px;
-	top: 200px;
 	right: 0px;
 	left: 50%;
-	margin-left: -250px;
+
+	top: $vsplit;
+	margin-left: $width / -2;
 }
 
 #title {
-	position: absolute;
+	@include centered;
+	@include font(21px);
 
-	font-family: Helvetica Neue;
-	font-size: 21px;
-
-	left: 50%;
-	margin-left: -250px;
-	width: 500px;
-	top: 50px;
+	top: 41px;
 }
 
 #column1 {
-	position: absolute;
+	@include centered;
 
-	left: 50%;
-	margin-left: -250px;
 	width: 100px;
-	top: 130px;
+	top: 126px;
 }
 
 #column2 {
-	position: absolute;
+	@include centered;
+	@include font(13px);
 
-	font-family: Helvetica Neue;
-	font-size: 13px;
-
-	left: 50%;
 	margin-left: -130px;
 	width: 400px;
-	top: 130px;
+	top: 126px;
 }
 
 .icon {
