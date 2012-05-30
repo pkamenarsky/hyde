@@ -21,6 +21,6 @@ main = html "5" $
 	sdiv ! sid "container" </>
 		[sdiv ! sid "container2",
 		sdiv ! sid "uuu" </>
-			[ssite $ stitle "LALAL",
+			[ssite $ stitle "This is a site - is it?",
 			sperson $ Person "John Carmack" 5]]
 
