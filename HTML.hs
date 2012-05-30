@@ -16,7 +16,9 @@ data Include = Script URL | CSS URL
 data Unit = Px | Pct | Pt
 data PositionV = Absolute | Relative | Static
 
-data StyleRule = Position PositionV | Left Integer Unit | BGColor Int
+data StyleRule = Position PositionV |
+	Left Int Unit | Top Int Unit | Width Integer Unit | Height Int Unit |
+	BGColor Int
 data Attr = Id String | Class String | Classes [String] | Style [StyleRule]
 
 data TagT = BodyT | SpanT | DivT | AT URL | ImgT URL deriving (Show)
@@ -55,7 +57,10 @@ renderStyleRule :: StyleRule -> String
 renderStyleRule (Position Absolute) = "position: absolute"
 renderStyleRule (Position Relative) = "position: relative"
 renderStyleRule (Position Static) = "position: static"
-renderStyleRule (Left left unit) = "left: " ++ show left ++ renderUnit unit
+renderStyleRule (Left x unit) = "left: " ++ show x ++ renderUnit unit
+renderStyleRule (Top x unit) = "top: " ++ show x ++ renderUnit unit
+renderStyleRule (Width x unit) = "width: " ++ show x ++ renderUnit unit
+renderStyleRule (Height x unit) = "height: " ++ show x ++ renderUnit unit
 renderStyleRule (BGColor c) = "background-color: #" ++ showHex c ""
 
 renderAttr :: Attr -> String
