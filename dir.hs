@@ -4,6 +4,7 @@ import System.Directory
 import System.Time
 import Data.List
 import Control.Monad
+import Control.Concurrent
 
 -- TimeFile
 
@@ -17,7 +18,7 @@ instance Eq TimeFile where
 
 -- Difference
 
-data Difference = Difference {new :: [FilePath], removed :: [FilePath], modified :: [FilePath]} deriving (Show)
+data Difference = Difference {new :: [FilePath], removed :: [FilePath], modified :: [FilePath]} deriving (Eq, Show)
 
 difference :: [TimeFile] -> [TimeFile] -> Difference
 difference old new =
@@ -25,6 +26,8 @@ difference old new =
 		(map filepath $ new \\ old)
 		(map filepath $ old \\ new)
 		(map filepath $ intersectBy (\(TimeFile (n, t)) (TimeFile (n', t')) -> n == n' && t /= t') old new)
+
+nullDiff (Difference new removed modified) = null new && null removed && null modified
 
 -- IO
 
@@ -41,7 +44,26 @@ getTimestamps path = do
 
 	return $ map TimeFile (zip files times) ++ concat rtimes
 
-main = getTimestamps "."
+pollR :: String -> [TimeFile] -> Difference -> (Difference -> IO ()) -> IO ()
+pollR path files diff action = do
+	files' <- getTimestamps path
+	let diff' = difference files files'
+
+	when ((not . nullDiff) diff' && diff /= diff') (action diff')
+
+	threadDelay 1000000
+	pollR path files' diff' action
+
+poll :: String -> (Difference -> IO ()) -> IO ()
+poll path action = do
+	files <- getTimestamps path
+	pollR path files (Difference [] [] []) action
+
+-- main
+
+main = poll "." print
+
+-- Tests
 
 zero = TOD 0 0
 
