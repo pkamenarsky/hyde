@@ -1,3 +1,4 @@
+import Prelude hiding (div)
 import HTML
 
 data Person = Person {name :: String, age :: Int}
@@ -6,21 +7,21 @@ home = Segment "home"
 post = Segment "post"
 
 sperson :: Person -> Tag
-sperson (Person name age) = sdiv </> [stitle name, stext $ show age]
+sperson (Person name age) = div </> [stitle name, text $ show age]
 
 stitle :: String -> Tag
-stitle text = stext text ! sclass "title" </> [sa [home, post] "post"]
+stitle title = text title ! Class "title" </> [a [home, post] "post"]
 
 ssite :: Tag -> Tag
 ssite tag =
-	sdiv ! sclass "main" </>
-		[sdiv ! sclass "content" </>
+	div ! Class "main" </>
+		[div ! Class "content" </>
 			[tag]]
 
-main = html "5" $
-	sdiv ! sid "container" </>
-		[sdiv ! sid "container2",
-		sdiv ! sid "uuu" </>
+main = html HTML5 [] $
+	div ! Id "container" </>
+		[div ! Id "container2",
+		div ! Id "uuu" </>
 			[ssite $ stitle "This is a site - is it?",
 			sperson $ Person "John Carmack" 7]]
 
