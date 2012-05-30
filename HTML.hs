@@ -1,5 +1,6 @@
 module HTML where
 
+import System.IO
 import List
 
 -- Combinators
@@ -39,11 +40,13 @@ renderURL (URL segments) = concat $ intersperse "/" $ map renderURL segments
 renderURL (Segment segment) = segment
 
 renderTag :: Tag -> String
-renderTag (Tag DivT content [] children) = "<div>" ++ concatMap renderTag children ++ content ++ "</div>"
-renderTag (Tag DivT content attrs children) = "<div " ++ concatMap (\(name, value) -> name ++ "=\"" ++ value ++ "\"") attrs ++ ">" ++ content ++ concatMap renderTag children ++ "</div>"
+renderTag (Tag DivT content [] children) = "<div>\n" ++ concatMap renderTag children ++ content ++ "</div>\n"
+renderTag (Tag DivT content attrs children) = "<div " ++ concatMap (\(name, value) -> name ++ "=\"" ++ value ++ "\"") attrs ++ ">\n" ++ content ++ concatMap renderTag children ++ "</div>\n"
 
-renderTag (Tag (AT url) content attrs children) = "<a href=\"" ++ renderURL url ++ "\"" ++ concatMap (\(name, value) -> name ++ "=\"" ++ value ++ "\"") attrs ++ ">" ++ content ++ concatMap renderTag children ++ "</a>"
+renderTag (Tag (AT url) content attrs children) = "<a href=\"" ++ renderURL url ++ "\"" ++ concatMap (\(name, value) -> name ++ "=\"" ++ value ++ "\"") attrs ++ ">" ++ content ++ concatMap renderTag children ++ "</a>\n"
 
 -- HTML
 
-html dtype tag = print $ "<doctype>" ++ show tag
+html dtype tag = do
+	putStrLn $ "<doctype>" ++ show tag
+	hFlush stdout
