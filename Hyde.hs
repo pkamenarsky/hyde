@@ -5,13 +5,16 @@ import System.Directory
 
 import Maybe
 import Data.List
+import Data.Char
 import System.Process
 import Control.Monad
+import Control.Concurrent
 import qualified FSWatcher as FSW
 
 -- Configuration
 
 dirIn = "site"
+dirGlobal = "global"
 dirOut = "out"
 
 suffixIn = ".hs"
@@ -25,11 +28,9 @@ stripSuffix suffix xs = do
 
 compile :: FSW.Difference -> IO ()
 compile diff = do
-	createDirectoryIfMissing True dirOut
-
 	let infiles = filter (isSuffixOf suffixIn) (FSW.new diff ++ FSW.modified diff)
 	let outfiles = map ((dirOut ++) . fromJust . (stripPrefix dirIn) . 
-		(++ suffixOut) . fromJust . (stripSuffix suffixIn)) infiles
+		(++ suffixOut) . fromJust . (stripSuffix suffixIn) . (map toLower)) infiles
 
 	putStr "Generating markup..."
 	hFlush stdout
@@ -46,4 +47,15 @@ compile diff = do
 	-- write generated output
 	when (not . null $ success) $ mapM_ (\(f, (_, o, _)) -> writeFile f o) success
 
-main = FSW.poll dirIn compile
+compileAll :: FSW.Difference -> IO ()
+compileAll _ = do
+	files <- FSW.getTimestamps dirIn
+	compile $ FSW.Difference (map FSW.filepath files) [] []
+
+main = do
+	createDirectoryIfMissing True dirIn
+	createDirectoryIfMissing True dirGlobal
+	createDirectoryIfMissing True dirOut
+
+	forkIO $ FSW.poll False dirGlobal compileAll
+	FSW.poll True dirIn compile

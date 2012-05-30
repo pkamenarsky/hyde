@@ -1,4 +1,4 @@
-module FSWatcher (poll, Difference, new, modified, removed) where
+module FSWatcher where
 
 import System.Directory
 import System.Time
@@ -56,10 +56,10 @@ pollR path files diff action = do
 	threadDelay 1000000
 	pollR path files' diff' action
 
-poll :: String -> (Difference -> IO ()) -> IO ()
-poll path action = do
+poll :: Bool -> String -> (Difference -> IO ()) -> IO ()
+poll initial path action = do
 	files <- getTimestamps path
-	action $ Difference (map filepath files) [] []
+	when initial $ action $ Difference (map filepath files) [] []
 	pollR path files (Difference [] [] []) action
 
 -- Tests

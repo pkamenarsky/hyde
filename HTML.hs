@@ -1,43 +1,30 @@
 module HTML where
 
-import Prelude hiding (Left)
+import Prelude hiding (div, Left)
 import System.IO
 import Numeric (showHex)
 import List
 
 -- Combinators
 
+data URL = URL String
+
+instance Show URL where
+	show (URL url) = url
+
 data Doctype = HTML5 | HTML4
-
-data URL = URL [URL] | Segment String deriving (Show)
-
 data Include = Script URL | CSS URL
-
 data Unit = Px | Pct | Pt
 data PositionV = Absolute | Relative | Static
-
 data StyleRule = Position PositionV |
 	Left Int Unit | Top Int Unit | Width Integer Unit | Height Int Unit |
 	BGColor Int
-data Attr = Id String | Class String | Classes [String] | Style [StyleRule]
 
-data TagT = BodyT | SpanT | DivT | AT URL | ImgT URL deriving (Show)
-data Tag = Tag {tag :: TagT, content :: String, attributes :: [Attr], children :: [Tag]}
+data Attr = Id String | Class String | Classes [String] | Style [StyleRule] | Href URL | Src URL
+data Tag = Tag {tag :: String, content :: String, attributes :: [Attr], children :: [Tag]}
 
 instance Show Tag where
 	show = renderTag
-
-body = Tag BodyT "" [] []
-div = Tag DivT "" [] []
-divText text = Tag DivT text [] []
-span = Tag SpanT "" [] []
-text text = Tag SpanT text [] []
-
-a :: [URL] -> String -> Tag
-a urls text = Tag (AT $ URL urls) text [] []
-
-img :: String -> Tag
-img url = Tag (ImgT $ Segment url) "" [] []
 
 (</>) :: Tag -> [Tag] -> Tag
 (</>) tag children = tag {children = children}
@@ -46,7 +33,20 @@ infixr 5 </>
 (!) :: Tag -> Attr -> Tag
 (!) tag attr = tag {attributes = attr : (attributes tag)} 
 
--- Renderer
+(<+>) :: (Show a, Show b) => a -> b -> URL
+(<+>) a b = URL $ show a ++ "/" ++ show b
+
+-- Tags
+
+body = Tag "body" "" [] []
+div = Tag "div" "" [] []
+divText text = Tag "div" text [] []
+span = Tag "span" "" [] []
+text text = Tag "span" text [] []
+a text url = Tag "a" text [Href url] []
+img url = Tag "img" "" [Src url] []
+
+-- Renderers
 
 renderUnit :: Unit -> String
 renderUnit Px = "px"
@@ -65,6 +65,8 @@ renderStyleRule (BGColor c) = "background-color: #" ++ showHex c ""
 
 renderAttr :: Attr -> String
 renderAttr (Id id) = "id=\"" ++ id ++ "\" "
+renderAttr (Src url) = "src=\"" ++ show url ++ "\" "
+renderAttr (Href url) = "href=\"" ++ show url ++ "\" "
 renderAttr (Class c) = "class=\"" ++ c ++ "\" " 
 renderAttr (Classes cs) = "class=\"" ++ concat (intersperse "; " cs) ++ "\" " 
 renderAttr (Style rules) = "style=\"" ++ concat (intersperse "; " $ map renderStyleRule rules) ++ "\" " 
@@ -74,31 +76,24 @@ renderDoctype HTML5 = "<!doctype html>\n"
 renderDoctype HTML4 = "<!doctype html public \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n"
 
 renderInclude :: Include -> String
-renderInclude (Script url) = "<script type=\"text/javascript\" src=\"" ++ renderURL url ++ "\"></script>\n"
-renderInclude (CSS url) = "<link rel=\"stylesheet\" type=\"text/css\" href=\"" ++ renderURL url ++ "\"></link>\n"
+renderInclude (Script url) = "<script type=\"text/javascript\" src=\"" ++ show url ++ "\"></script>\n"
+renderInclude (CSS url) = "<link rel=\"stylesheet\" type=\"text/css\" href=\"" ++ show url ++ "\"></link>\n"
 
-renderURL :: URL -> String
-renderURL (URL segments) = concat $ intersperse "/" $ map renderURL segments
-renderURL (Segment segment) = segment
+-- renderURL :: URL -> String
+-- renderURL (URL a b) = renderURL a ++ "/" ++ renderURL b
+-- renderURL (Segment url) = url
 
 renderTag :: Tag -> String
-
--- body
-renderTag (Tag BodyT content attrs children) = "<body " ++ concatMap renderAttr attrs ++ ">\n" ++ content ++ concatMap renderTag children ++ "</body>\n"
-
--- span
-renderTag (Tag SpanT content attrs children) = "<span " ++ concatMap renderAttr attrs ++ ">\n" ++ content ++ concatMap renderTag children ++ "</span>\n"
-
--- div
-renderTag (Tag DivT content attrs children) = "<div " ++ concatMap renderAttr attrs ++ ">\n" ++ content ++ concatMap renderTag children ++ "</div>\n"
-
--- a
-renderTag (Tag (AT url) content attrs children) = "<a href=\"" ++ renderURL url ++ "\"" ++ concatMap renderAttr attrs ++ ">" ++ content ++ concatMap renderTag children ++ "</a>\n"
-
--- img
-renderTag (Tag (ImgT url) _ _ _) = "<img src=\"" ++ renderURL url ++ "\">\n"
+renderTag (Tag tag content attrs children) = "<" ++ tag ++ " " ++ concatMap renderAttr attrs ++ ">\n" ++ content ++ concatMap renderTag children ++ "</" ++ tag ++ ">\n"
 
 -- HTML
 
 html :: Doctype -> [Include] -> Tag -> IO ()
 html dtype includes tag = putStrLn $ renderDoctype dtype ++ concatMap renderInclude includes ++ show tag
+
+-- Utils
+
+vGrid height count = div ! Style [Position Absolute, Width 100 Pct, Height 100 Pct] </>
+	map (\y -> div ! Style
+			[Position Absolute, BGColor 0xffeeee, Width 100 Pct, Height height Px, Top (y * height * 2) Px])
+		[0..count]
