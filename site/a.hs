@@ -12,5 +12,5 @@ main = html HTML5 [CSS $ Segment "style.css"] $ body </>
 	[
 	-- vGrid 21 30,
 	text "YOLO" ! Id "main",
-	div ! Id "menu" </> (map (\x -> divText x ! Class "menuitem") menu) ++ [span ! Id "stretcher"],
+	div ! Id "menu" </> (map (\x -> div ! Class "menuitem" </> [a [Segment "home"] x]) menu) ++ [span ! Id "stretcher"],
 	div ! Id "line"]

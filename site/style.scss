@@ -34,6 +34,11 @@ body {
 .menuitem {
 	width: auto;
 	display: inline-block;
+}
+
+.menuitem a {
+	outline: none;
+	text-decoration: none;
 	color: #333333;
 
 	font-family: Helvetica Neue;
