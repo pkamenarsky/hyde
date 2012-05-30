@@ -13,8 +13,8 @@ import qualified FSWatcher as FSW
 
 -- Configuration
 
-dirIn = "site"
-dirGlobal = "global"
+dirIn = "Site"
+dirGlobal = "Global"
 dirOut = "out"
 
 suffixIn = ".hs"
