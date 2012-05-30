@@ -47,6 +47,4 @@ renderTag (Tag (AT url) content attrs children) = "<a href=\"" ++ renderURL url 
 
 -- HTML
 
-html dtype tag = do
-	putStrLn $ "<doctype>" ++ show tag
-	hFlush stdout
+html dtype tag = putStrLn $ "<doctype>" ++ show tag
