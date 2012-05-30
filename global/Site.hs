@@ -6,14 +6,19 @@ import Data.Char
 
 -- Globals
 
+up = URL ".."
 home = URL "."
+resources = up <+> "resources"
 
 -- Menu
 
-items = ["PHILOSOPHY", "PROCESS", "CLIENTS", "CONTACT"]
+items = ["PHILOSOPHY", "PROCESS", "CLIENTS", "TEAM", "CONTACT"]
 urls = map (URL . (++ ".html") . (map toLower)) items
 
 -- Content
+
+title :: String -> Tag
+title title = text title ! Id "title"
 
 site :: Tag -> IO ()
 site content = html HTML5 [CSS $ URL "style.css"] $ body </>

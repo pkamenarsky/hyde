@@ -1,3 +1,5 @@
+{-# LANGUAGE TypeSynonymInstances #-}
+
 module HTML where
 
 import Prelude hiding (div, Left)
@@ -7,10 +9,16 @@ import List
 
 -- Combinators
 
+class ToString a where
+	toString :: a -> String
+
 data URL = URL String
 
-instance Show URL where
-	show (URL url) = url
+instance ToString URL where
+	toString (URL url) = url
+
+instance ToString String where
+	toString = id
 
 data Doctype = HTML5 | HTML4
 data Include = Script URL | CSS URL
@@ -33,8 +41,8 @@ infixr 5 </>
 (!) :: Tag -> Attr -> Tag
 (!) tag attr = tag {attributes = attr : (attributes tag)} 
 
-(<+>) :: (Show a, Show b) => a -> b -> URL
-(<+>) a b = URL $ show a ++ "/" ++ show b
+(<+>) :: (ToString a, ToString b) => a -> b -> URL
+(<+>) a b = URL $ toString a ++ "/" ++ toString b
 
 -- Tags
 
@@ -44,7 +52,7 @@ divText text = Tag "div" text [] []
 span = Tag "span" "" [] []
 text text = Tag "span" text [] []
 a text url = Tag "a" text [Href url] []
-img url = Tag "img" "" [Src url] []
+img src = Tag "img" "" [Src src] []
 
 -- Renderers
 
@@ -65,8 +73,8 @@ renderStyleRule (BGColor c) = "background-color: #" ++ showHex c ""
 
 renderAttr :: Attr -> String
 renderAttr (Id id) = "id=\"" ++ id ++ "\" "
-renderAttr (Src url) = "src=\"" ++ show url ++ "\" "
-renderAttr (Href url) = "href=\"" ++ show url ++ "\" "
+renderAttr (Src url) = "src=\"" ++ toString url ++ "\" "
+renderAttr (Href url) = "href=\"" ++ toString url ++ "\" "
 renderAttr (Class c) = "class=\"" ++ c ++ "\" " 
 renderAttr (Classes cs) = "class=\"" ++ concat (intersperse "; " cs) ++ "\" " 
 renderAttr (Style rules) = "style=\"" ++ concat (intersperse "; " $ map renderStyleRule rules) ++ "\" " 
@@ -76,12 +84,8 @@ renderDoctype HTML5 = "<!doctype html>\n"
 renderDoctype HTML4 = "<!doctype html public \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n"
 
 renderInclude :: Include -> String
-renderInclude (Script url) = "<script type=\"text/javascript\" src=\"" ++ show url ++ "\"></script>\n"
-renderInclude (CSS url) = "<link rel=\"stylesheet\" type=\"text/css\" href=\"" ++ show url ++ "\"></link>\n"
-
--- renderURL :: URL -> String
--- renderURL (URL a b) = renderURL a ++ "/" ++ renderURL b
--- renderURL (Segment url) = url
+renderInclude (Script url) = "<script type=\"text/javascript\" src=\"" ++ toString url ++ "\"></script>\n"
+renderInclude (CSS url) = "<link rel=\"stylesheet\" type=\"text/css\" href=\"" ++ toString url ++ "\"></link>\n"
 
 renderTag :: Tag -> String
 renderTag (Tag tag content attrs children) = "<" ++ tag ++ " " ++ concatMap renderAttr attrs ++ ">\n" ++ content ++ concatMap renderTag children ++ "</" ++ tag ++ ">\n"
@@ -92,6 +96,8 @@ html :: Doctype -> [Include] -> Tag -> IO ()
 html dtype includes tag = putStrLn $ renderDoctype dtype ++ concatMap renderInclude includes ++ show tag
 
 -- Utils
+
+imgLink src link = a "" link </> [img src]
 
 vGrid height count = div ! Style [Position Absolute, Width 100 Pct, Height 100 Pct] </>
 	map (\y -> div ! Style

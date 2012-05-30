@@ -61,3 +61,43 @@ body {
 	left: 50%;
 	margin-left: -250px;
 }
+
+#title {
+	position: absolute;
+
+	font-family: Helvetica Neue;
+	font-size: 21px;
+
+	left: 50%;
+	margin-left: -250px;
+	width: 500px;
+	top: 50px;
+}
+
+#column1 {
+	position: absolute;
+
+	left: 50%;
+	margin-left: -250px;
+	width: 100px;
+	top: 130px;
+}
+
+#column2 {
+	position: absolute;
+
+	font-family: Helvetica Neue;
+	font-size: 13px;
+
+	left: 50%;
+	margin-left: -130px;
+	width: 400px;
+	top: 130px;
+}
+
+.icon {
+	position: absolute;
+
+	width: 100px;
+	height: 100px;
+}
