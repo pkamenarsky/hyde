@@ -9,5 +9,5 @@ compile diff = do
 	p' <- mapM (\f -> readProcessWithExitCode "runhaskell" [f] "") $ FSW.modified diff
 	putStrLn $ concat $ map (\(_, o, e) -> o ++ e) (p ++ p')
 
-main = FSW.poll "." compile
+main = FSW.poll "site" compile
 

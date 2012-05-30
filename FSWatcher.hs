@@ -57,5 +57,6 @@ pollR path files diff action = do
 poll :: String -> (Difference -> IO ()) -> IO ()
 poll path action = do
 	files <- getTimestamps path
+	action $ Difference (map filepath files) [] []
 	pollR path files (Difference [] [] []) action
 
