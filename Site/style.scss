@@ -25,6 +25,15 @@ body {
 	padding: 0px;
 }
 
+#logo {
+	@include centered;
+	margin-left: $width / -2 - 50;
+
+	top: 50px;
+	width: 100px;
+	height: 100px;
+}
+
 #main {
 	@include centered;
 	top: $vsplit;
