@@ -25,6 +25,7 @@ site content = html HTML5 [CSS $ URL "style.css"] $ body </>
 	[
 	-- vGrid 21 30,
 	imgLink (resources <+> "logo.png") home ! Id "logo",
-	content ! Id "main",
 	div ! Id "menu" </> (map (\(item, url) -> div ! Class "menuitem" </> [a item $ home <+> url]) $ zip items urls) ++ [span ! Id "stretcher"],
-	div ! Id "line"]
+	div ! Id "line",
+	div ! Id "main" </>
+		[content]]

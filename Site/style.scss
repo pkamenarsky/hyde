@@ -21,7 +21,7 @@ $vsplit: $leading * 12;
 	font-family: Helvetica Neue, Helvetica, Arial;
 	font-size: $size;
 	line-height: $leading;
-	text-align: justify;
+//	text-align: justify;
 }
 
 // Layout
@@ -86,35 +86,40 @@ body {
 }
 
 #title {
-	@include centered;
 	@include font(21px);
 
-	margin-top: 2px; // baseline fix
-
-	top: $leading * 2;
+	margin-top: $leading * 4 - 2px; // -2px baseline fix
+	margin-bottom: 2 * $leading;
+	line-height: $leading * 1.5;
 }
 
-#column1 {
-	@include centered;
-
-	width: 100px;
-	top: 126px;
+.pitch {
+	position: relative;
+	margin-bottom: 2 * $leading;
 }
 
-#column2 {
-	@include centered;
+.pitch-icon {
+	margin-left: -($colw);
+	margin-top: 3 * $leading;
+	position: absolute;
+}
+
+.pitch-title {
+	top: 0px;
+	@include font(18px);
+
+	padding-top: 5px;
+	margin-bottom: 2 * $leading - 5px; // baseline fix + empty line
+
+	margin-left: ($colw + $margin);
+}
+
+.pitch-copy {
+	top: 2 * $leading;
 	@include font(13px);
 
-	margin-top: 5px; // baseline fix
+	padding-top: 7px;
+	margin-bottom: -7px; // baseline fix
 
-	margin-left: -130px;
-	width: 400px;
-	top: 126px;
-}
-
-.icon {
-	position: absolute;
-
-	width: 100px;
-	height: 100px;
+	margin-left: ($colw + $margin);
 }
