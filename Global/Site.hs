@@ -17,16 +17,13 @@ urls = map (URL . (++ ".html") . (map toLower)) items
 
 -- Content
 
-title :: String -> Tag
 title title = divText title ! Id "title"
 
-menu :: Tag
 menu = table ! Id "menu" </> [tr ! Class "menurow" </>
 	map (\(item, url, i) ->
-			tdTag (a item $ home <+> url) !  Classes (if i == 0 then left else rest))
-		(zip3 items urls [0..])] where
-			left = ["menuleft"]
-			rest = ["menurest"]
+			tdTag (a item $ home <+> url) !
+			Class (if i == 0 then "menuleft" else "menurest"))
+		(zip3 items urls [0..])]
 
 site :: Tag -> IO ()
 site content = html HTML5 [CSS $ URL "style.css"] $ body </>

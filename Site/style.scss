@@ -50,13 +50,13 @@ body {
 	border-spacing: 0px;
 
 	top: $vsplit;
-	margin-top: $leading * -2;
+	margin-top: $leading * -2 + 5px; // 5px baseline fix
+
 	height: $leading;
 }
 
 .menurow {
 	width: 100%;
-	margin-top: 5px; // baseline fix
 }
 
 .menuleft {
@@ -101,6 +101,7 @@ body {
 	@include font(21px);
 
 	margin-top: $leading * 4 - 2px; // -2px baseline fix
+	margin-left: $margin;
 	margin-bottom: 2 * $leading;
 	line-height: $leading * 1.5;
 }
