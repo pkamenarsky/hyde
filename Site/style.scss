@@ -1,7 +1,11 @@
 // Layout globals
 
-$width: 500px;
-$vsplit: 210px;
+$colw: 60px;
+$margin: 20px;
+
+$width: 7 * ($colw + $margin);
+$leading: 21px;
+$vsplit: $leading * 12;
 
 // Mixins
 
@@ -13,9 +17,11 @@ $vsplit: 210px;
 }
 
 @mixin font($size) {
-	color: #333333;
+	color: #555555;
 	font-family: Helvetica Neue, Helvetica, Arial;
 	font-size: $size;
+	line-height: $leading;
+	text-align: justify;
 }
 
 // Layout
@@ -27,11 +33,9 @@ body {
 
 #logo {
 	@include centered;
-	margin-left: $width / -2 - 50;
+	margin-left: $width / -2 - $colw;
 
-	top: 50px;
-	width: 100px;
-	height: 100px;
+	top: 3 * $leading;
 }
 
 #main {
@@ -45,13 +49,15 @@ body {
 	text-align: justify;
 
 	top: $vsplit;
-	margin-top: -25px;
-	height: 25px;
+	margin-top: $leading * -2;
+	height: $leading;
 }
 
 .menuitem {
 	width: auto;
 	display: inline-block;
+
+	margin-top: 5px; // baseline fix
 }
 
 .menuitem a {
@@ -83,7 +89,9 @@ body {
 	@include centered;
 	@include font(21px);
 
-	top: 41px;
+	margin-top: 2px; // baseline fix
+
+	top: $leading * 2;
 }
 
 #column1 {
@@ -96,6 +104,8 @@ body {
 #column2 {
 	@include centered;
 	@include font(13px);
+
+	margin-top: 5px; // baseline fix
 
 	margin-left: -130px;
 	width: 400px;
