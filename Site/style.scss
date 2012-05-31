@@ -45,22 +45,34 @@ body {
 
 #menu {
 	@include centered;
-
-	text-align: justify;
+	
+	border-collapse: collapse;
+	border-spacing: 0px;
 
 	top: $vsplit;
 	margin-top: $leading * -2;
 	height: $leading;
 }
 
-.menuitem {
-	width: auto;
-	display: inline-block;
-
+.menurow {
+	width: 100%;
 	margin-top: 5px; // baseline fix
 }
 
-.menuitem a {
+.menuleft {
+	padding: 0px;
+	text-align: left;
+	width: 1px;
+	white-space: nowrap;
+}
+
+.menurest {
+	padding: 0px;
+	text-align: right;
+	width: 1000px;
+}
+
+.menuleft a, .menurest a {
 	outline: none;
 	text-decoration: none;
 

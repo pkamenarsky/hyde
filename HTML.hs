@@ -53,6 +53,11 @@ span = Tag "span" "" [] []
 text text = Tag "span" text [] []
 a text url = Tag "a" text [Href url] []
 img src = Tag "img" "" [Src src] []
+table = Tag "table" "" [] []
+tr = Tag "tr" "" [] []
+td = Tag "td" "" [] []
+tdTag tag = Tag "td" "" [] [tag]
+tdText text = Tag "td" text [] []
 
 -- Renderers
 

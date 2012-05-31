@@ -20,12 +20,20 @@ urls = map (URL . (++ ".html") . (map toLower)) items
 title :: String -> Tag
 title title = divText title ! Id "title"
 
+menu :: Tag
+menu = table ! Id "menu" </> [tr ! Class "menurow" </>
+	map (\(item, url, i) ->
+			tdTag (a item $ home <+> url) !  Classes (if i == 0 then left else rest))
+		(zip3 items urls [0..])] where
+			left = ["menuleft"]
+			rest = ["menurest"]
+
 site :: Tag -> IO ()
 site content = html HTML5 [CSS $ URL "style.css"] $ body </>
 	[
 	-- vGrid 21 30,
 	imgLink (resources <+> "logo.png") home ! Id "logo",
-	div ! Id "menu" </> (map (\(item, url) -> div ! Class "menuitem" </> [a item $ home <+> url]) $ zip items urls) ++ [span ! Id "stretcher"],
+	menu,
 	div ! Id "line",
 	div ! Id "main" </>
 		[content]]
