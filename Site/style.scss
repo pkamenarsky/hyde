@@ -3,7 +3,8 @@
 $colw: 60px;
 $margin: 20px;
 
-$width: 7 * ($colw + $margin);
+$fcolor: #555555;
+$width: 8 * ($colw + $margin);
 $leading: 21px;
 $vsplit: $leading * 12;
 
@@ -17,7 +18,7 @@ $vsplit: $leading * 12;
 }
 
 @mixin font($size) {
-	color: #555555;
+	color: $fcolor;
 	font-family: Helvetica Neue, Helvetica, Arial;
 	font-size: $size;
 	line-height: $leading;
@@ -53,6 +54,9 @@ body {
 	margin-top: $leading * -2 + 5px; // 5px baseline fix
 
 	height: $leading;
+
+	@include font(13px);
+	font-weight: bold;
 }
 
 .menurow {
@@ -75,9 +79,14 @@ body {
 .menuleft a, .menurest a {
 	outline: none;
 	text-decoration: none;
+}
 
-	@include font(13px);
-	font-weight: bold;
+.menuactive {
+	color: #4d9dB4;
+}
+
+.menuinactive {
+	color: $fcolor;
 }
 
 #stretcher {
@@ -101,8 +110,8 @@ body {
 	@include font(21px);
 
 	margin-top: $leading * 4 - 2px; // -2px baseline fix
-	margin-left: $margin;
-	margin-bottom: 2 * $leading;
+//	margin-left: $margin;
+	margin-bottom: 3 * $leading;
 	line-height: $leading * 1.5;
 }
 
@@ -112,19 +121,23 @@ body {
 }
 
 .pitch-icon {
-	margin-left: -($colw);
-	margin-top: 3 * $leading;
+	margin-left: -($colw ) * 2 - $margin;
+	margin-top: 2 * $leading;
 	position: absolute;
 }
 
 .pitch-title {
 	top: 0px;
-	@include font(18px);
+	@include font(16px);
+
+//	font-family: Georgia;
+//	font-style: italic;
+//	font-weight: bold;
 
 	padding-top: 5px;
-	margin-bottom: 2 * $leading - 5px; // baseline fix + empty line
+	margin-bottom: 1 * $leading - 5px; // baseline fix + empty line
 
-	margin-left: ($colw + $margin);
+//	margin-left: $margin;
 }
 
 .pitch-copy {
@@ -134,5 +147,5 @@ body {
 	padding-top: 7px;
 	margin-bottom: -7px; // baseline fix
 
-	margin-left: ($colw + $margin);
+//	margin-left: $margin;
 }
