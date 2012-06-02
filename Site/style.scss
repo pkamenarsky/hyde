@@ -111,13 +111,13 @@ body {
 
 	margin-top: $leading * 4 - 2px; // -2px baseline fix
 //	margin-left: $margin;
-	margin-bottom: 3 * $leading;
+	margin-bottom: 2 * $leading;
 	line-height: $leading * 1.5;
 }
 
 .pitch {
 	position: relative;
-	margin-bottom: 2 * $leading;
+	margin-bottom: 1 * $leading;
 }
 
 .pitch-icon {
@@ -127,25 +127,23 @@ body {
 }
 
 .pitch-title {
-	top: 0px;
-	@include font(16px);
+	@include font(13px);
 
 //	font-family: Georgia;
 //	font-style: italic;
 //	font-weight: bold;
 
-	padding-top: 5px;
-	margin-bottom: 1 * $leading - 5px; // baseline fix + empty line
+	padding-top: 9px;
+	margin-bottom: 1 * $leading - 7px; // baseline fix + empty line
 
 //	margin-left: $margin;
 }
 
 .pitch-copy {
-	top: 2 * $leading;
 	@include font(13px);
 
 	padding-top: 7px;
-	margin-bottom: -7px; // baseline fix
+	margin-bottom: -9px; // baseline fix
 
 //	margin-left: $margin;
 }
