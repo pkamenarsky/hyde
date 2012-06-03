@@ -81,7 +81,7 @@ renderAttr (Id id) = "id=\"" ++ id ++ "\" "
 renderAttr (Src url) = "src=\"" ++ toString url ++ "\" "
 renderAttr (Href url) = "href=\"" ++ toString url ++ "\" "
 renderAttr (Class c) = "class=\"" ++ c ++ "\" " 
-renderAttr (Classes cs) = "class=\"" ++ concat (intersperse "; " cs) ++ "\" " 
+renderAttr (Classes cs) = "class=\"" ++ concat (intersperse " " cs) ++ "\" " 
 renderAttr (Style rules) = "style=\"" ++ concat (intersperse "; " $ map renderStyleRule rules) ++ "\" " 
 
 renderDoctype :: Doctype -> String

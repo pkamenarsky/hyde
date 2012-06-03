@@ -13,7 +13,7 @@ resources = up <+> "resources"
 -- Menu
 
 items = ["ABOUT US", "DEVELOPMENT", "CLIENTS", "TEAM", "CONTACT"]
-urls = map (URL . (++ ".html") . (map toLower)) items
+urls = map (URL . (++ ".html") . (map toLower) . filter (/= ' ')) items
 
 -- Content
 

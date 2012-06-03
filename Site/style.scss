@@ -109,34 +109,44 @@ body {
 #title {
 	@include font(21px);
 
-	margin-top: $leading * 4 - 2px; // -2px baseline fix
 //	margin-left: $margin;
+	margin-top: $leading * 4 - 2px; // -2px baseline fix
 	margin-bottom: 2 * $leading;
 	line-height: $leading * 1.5;
+	height: 3 * $leading;
 }
 
 .pitch {
 	position: relative;
-	margin-bottom: 1 * $leading;
+	// margin-left: $colw;
+	margin-bottom: 2 * $leading;
 }
 
 .pitch-icon {
-	margin-left: -($colw ) * 2 - $margin;
-	margin-top: 2 * $leading;
+	// margin-top: 4 * $leading;
+	// margin-top: -1 * $leading;
+	margin-left: -($colw * 2 + $margin);
+	top: 50%;
 	position: absolute;
 }
 
 .pitch-title {
-	@include font(13px);
+	@include font(18px);
 
-//	font-family: Georgia;
-//	font-style: italic;
-//	font-weight: bold;
+	// font-weight: bold;
 
+	margin-left: -$colw;
 	padding-top: 9px;
 	margin-bottom: 1 * $leading - 7px; // baseline fix + empty line
+}
 
-//	margin-left: $margin;
+.pitch-separator {
+	background-color: #999999;
+	position: absolute;
+	top: 10px;
+	bottom: 4px;
+	width: 2px;
+	margin-left: -$margin;
 }
 
 .pitch-copy {
@@ -144,6 +154,9 @@ body {
 
 	padding-top: 7px;
 	margin-bottom: -9px; // baseline fix
+	text-align: justify;
+}
 
-//	margin-left: $margin;
+.pitch-indented {
+	margin-left: $colw;
 }
