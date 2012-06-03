@@ -28,6 +28,7 @@ $vsplit: $leading * 12;
 // Layout
 
 body {
+//	background-color: #f5f5f5;
 	margin: 0px;
 	padding: 0px;
 }
@@ -40,6 +41,12 @@ body {
 }
 
 #main {
+//	background-color: #ffffff;
+
+//	border-style: solid;
+//	border-width: 1px;
+//	border-color: #dddddd;
+
 	@include centered;
 	top: $vsplit;
 }
@@ -109,7 +116,8 @@ body {
 #title {
 	@include font(21px);
 
-//	margin-left: $margin;
+	margin-left: $colw;
+	margin-right: $colw;
 	margin-top: $leading * 4 - 2px; // -2px baseline fix
 	margin-bottom: 2 * $leading;
 	line-height: $leading * 1.5;
@@ -118,7 +126,8 @@ body {
 
 .pitch {
 	position: relative;
-	// margin-left: $colw;
+	margin-left: $colw;
+	margin-right: $colw;
 	margin-bottom: 2 * $leading;
 }
 
@@ -135,7 +144,7 @@ body {
 
 	// font-weight: bold;
 
-	margin-left: -$colw;
+	// margin-left: -$colw;
 	padding-top: 9px;
 	margin-bottom: 1 * $leading - 7px; // baseline fix + empty line
 }
