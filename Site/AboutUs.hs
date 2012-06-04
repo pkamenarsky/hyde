@@ -10,7 +10,7 @@ pitch copy = div ! Class "pitch" </> [divText copy ! Class "pitch-copy"]
 titledPitch icon title copy = div ! Classes ["pitch", "pitch-indented"] </>
 	[
 	-- div ! Class "pitch-separator",
-	img (resources <+> icon) ! Class "pitch-icon",
+	-- img (resources <+> icon) ! Class "pitch-icon",
 	divText title ! Class "pitch-title",
 	divText copy ! Class "pitch-copy"]
 

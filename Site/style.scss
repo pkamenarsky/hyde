@@ -116,7 +116,6 @@ body {
 #title {
 	@include font(21px);
 
-	margin-left: $colw;
 	margin-right: $colw;
 	margin-top: $leading * 4 - 2px; // -2px baseline fix
 	margin-bottom: 2 * $leading;
@@ -126,8 +125,6 @@ body {
 
 .pitch {
 	position: relative;
-	margin-left: $colw;
-	margin-right: $colw;
 	margin-bottom: 2 * $leading;
 }
 
@@ -144,7 +141,6 @@ body {
 
 	// font-weight: bold;
 
-	// margin-left: -$colw;
 	padding-top: 9px;
 	margin-bottom: 1 * $leading - 7px; // baseline fix + empty line
 }
@@ -167,5 +163,5 @@ body {
 }
 
 .pitch-indented {
-	margin-left: $colw;
+//	margin-left: $colw;
 }
