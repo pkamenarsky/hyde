@@ -7,7 +7,7 @@ $column: $colw + $margin;
 $fcolor: #555555;
 $width: 9 * ($colw + $margin);
 $leading: 21px;
-$vsplit: $leading * 10;
+$vsplit: $leading * 12;
 
 // Mixins
 
@@ -36,9 +36,10 @@ body {
 
 #logo {
 	@include centered;
-	margin-left: $width / -2 - $column;
+	width: auto;
+	margin-left: $width / -2;
 
-	top: 3 * $leading;
+	top: 5 * $leading;
 }
 
 #main-bg {
@@ -60,18 +61,34 @@ body {
 }
 
 #menu {
-	@include centered;
+	position: absolute;
+	right: 0px;
+	top: -5 * $leading;
 
-	margin-top: 4 * $leading + 4px;
-	margin-left: $width / -2 - 2 * $column - $margin;
-	width: 2 * $column;
+	margin-top: 5px;
 	
-	top: $vsplit;
-
-	@include font(13px);
+	@include font(14px);
 //	font-weight: bold;
 //	text-align: right;
 //	line-height: $leading * 1.5;
+}
+
+#menu span {
+	float: left;
+}
+
+.submenu {
+	font-size: 11px;
+}
+
+#menuline {
+	position: absolute;
+	top: 0px;
+	width: 100%;
+	height: 2px;
+
+	margin-top: -3px;
+	background-color: $fcolor;
 }
 
 #menu a {
@@ -92,8 +109,7 @@ body {
 	@include font(21px);
 
 	margin-left: $colw;
-	margin-right: $colw;
-	margin-top: $leading * 4 - 2px; // -2px baseline fix
+	margin-top: $leading * 2 - 2px; // -2px baseline fix
 	margin-bottom: 2 * $leading;
 	line-height: $leading * 1.5;
 	height: 3 * $leading;
@@ -102,7 +118,6 @@ body {
 .pitch {
 	position: relative;
 	margin-left: $colw;
-	margin-right: $colw;
 	margin-bottom: 2 * $leading;
 }
 
@@ -119,7 +134,7 @@ body {
 
 	// font-weight: bold;
 
-	// margin-left: -$colw;
+	margin-left: 2 * $margin;
 	padding-top: 9px;
 	margin-bottom: 1 * $leading - 7px; // baseline fix + empty line
 }
@@ -137,6 +152,7 @@ body {
 	@include font(13px);
 
 	padding-top: 7px;
+	margin-left: 2 * $margin;
 	margin-bottom: -9px; // baseline fix
 	text-align: justify;
 }

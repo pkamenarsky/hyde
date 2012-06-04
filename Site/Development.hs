@@ -16,6 +16,6 @@ titledPitch icon title copy = div ! Class "pitch" </>
 main = do
 	copy <- readFile "Global/dev1.html"
 
-	site 1 $ div </>
+	site 1 0 $ div </>
 		[title "It pays to do things right the first time.",
 		pitch copy]
