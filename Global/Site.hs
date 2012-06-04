@@ -31,7 +31,7 @@ site active content = html HTML5 [CSS $ URL "style.css"] $ body </>
 	[
 	-- vGrid 21 30,
 	imgLink (resources <+> "logo.png") home ! Id "logo",
-	menu active,
-	div ! Id "line",
+	-- menu active,
+	-- div ! Id "line",
 	div ! Id "main" </>
 		[content]]
