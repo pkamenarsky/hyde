@@ -1,4 +1,4 @@
-module Global.Site (site, title) where
+module Global.Site (site, title, resources) where
 
 import Prelude hiding (div, span)
 import HTML

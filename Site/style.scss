@@ -124,11 +124,11 @@ body {
 }
 
 .pitch-icon {
-	// margin-top: 4 * $leading;
-	// margin-top: -1 * $leading;
-	margin-left: -($colw * 2 + $margin) - $colw + $margin * 2;
-	top: 50%;
 	position: absolute;
+	top: 50%;
+	left: 0px;
+	margin-top: -3px;
+	margin-left: -12px - $margin * 2 
 }
 
 .pitch-title {
@@ -141,16 +141,8 @@ body {
 	margin-bottom: 1 * $leading - 7px; // baseline fix + empty line
 }
 
-.pitch-separator {
-	background-color: #999999;
-	position: absolute;
-	top: 10px;
-	bottom: 4px;
-	width: 2px;
-	margin-left: -$margin;
-}
-
 .pitch-copy {
+	position: relative;
 	@include font(13px);
 
 	padding-top: 7px;
