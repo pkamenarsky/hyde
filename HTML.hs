@@ -88,6 +88,9 @@ renderDoctype :: Doctype -> String
 renderDoctype HTML5 = "<!doctype html>\n"
 renderDoctype HTML4 = "<!doctype html public \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n"
 
+renderHead :: String -> String
+renderHead title = "<head><title>" ++ title ++ "</title></head>"
+
 renderInclude :: Include -> String
 renderInclude (Script url) = "<script type=\"text/javascript\" src=\"" ++ toString url ++ "\"></script>\n"
 renderInclude (CSS url) = "<link rel=\"stylesheet\" type=\"text/css\" href=\"" ++ toString url ++ "\"></link>\n"
@@ -97,8 +100,8 @@ renderTag (Tag tag content attrs children) = "<" ++ tag ++ " " ++ concatMap rend
 
 -- HTML
 
-html :: Doctype -> [Include] -> Tag -> IO ()
-html dtype includes tag = putStrLn $ renderDoctype dtype ++ concatMap renderInclude includes ++ show tag
+html :: String -> Doctype -> [Include] -> Tag -> IO ()
+html title dtype includes tag = putStrLn $ renderHead title ++ renderDoctype dtype ++ concatMap renderInclude includes ++ show tag
 
 -- Utils
 

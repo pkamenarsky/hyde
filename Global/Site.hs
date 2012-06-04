@@ -13,7 +13,7 @@ resources = up <+> "resources"
 
 -- Menu
 
-items = [["ABOUT US"], ["PROCESS", "PLANNING", "DEVELOPMENT", "MAINTENANCE"], ["CLIENTS"], ["TEAM"], ["CONTACT"]]
+items = [["About Us"], ["Process", "Planning", "Development", "Maintenance"], ["Clients"], ["Team"], ["Contact"]]
 
 -- Content
 
@@ -25,7 +25,7 @@ menu active sactive = div ! Id "menu" </> (div ! Id "menuline") :
 		getLink (x:y:_) = y
 		getLink (x:_) = x
 
-		mkLink name link = a name $ home <+> ((++ ".html") $ map toLower $ filter (/= ' ') $ link)
+		mkLink name link = a (map toUpper name) $ home <+> ((++ ".html") $ map toLower $ filter (/= ' ') $ link)
 		mkSublinks subitems = map (\(sitem, j) ->
 				mkLink sitem sitem ! Classes [if j == sactive then "menuactive" else "menuinactive", "submenu"])
 			(zip subitems [0..])
@@ -37,7 +37,7 @@ menu active sactive = div ! Id "menu" </> (div ! Id "menuline") :
 			(zip items [0..])
 
 site :: Int -> Int -> Tag -> IO ()
-site active subactive content = html HTML5 [CSS $ URL "style.css"] $ body </>
+site active subactive content = html (head $ items !! active) HTML5 [CSS $ URL "style.css"] $ body </>
 	[
 	-- vGrid 21 30,
 	imgLink (resources <+> "logo.png") home ! Id "logo",
