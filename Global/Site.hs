@@ -13,23 +13,27 @@ resources = up <+> "resources"
 
 -- Menu
 
-items = [["ABOUT US"], ["DEVELOPMENT", "PLANNING", "DEVELOPMENT", "MAINTENANCE"], ["CLIENTS"], ["TEAM"], ["CONTACT"]]
+items = [["ABOUT US"], ["PROCESS", "PLANNING", "DEVELOPMENT", "MAINTENANCE"], ["CLIENTS"], ["TEAM"], ["CONTACT"]]
 
 -- Content
 
 title title = divText title ! Id "title"
 
-menu active subactive = div ! Id "menu" </> [div ! Id "menuline"] ++
+menu active sactive = div ! Id "menu" </> (div ! Id "menuline") :
 	intersperse (text "&nbsp;-&nbsp;") spans where
 
-		chClass a b = if a == b then "menuactive" else "menuinactive"
-		makeLink item = a item $ home <+> ((++ ".html") $ map toLower $ filter (/= ' ') $ item)
+		getLink (x:y:_) = y
+		getLink (x:_) = x
 
-		spans = map (\((item:subitems), i) -> span </>
-				if i == active then (makeLink item ! Class "menuactive") :
-					map (\(subitem, j) -> div </> [makeLink subitem ! Classes [chClass j subactive, "submenu"]])
-						(zip subitems [0..])
-				else [makeLink item ! Class "menuinactive"])
+		mkLink name link = a name $ home <+> ((++ ".html") $ map toLower $ filter (/= ' ') $ link)
+		mkSublinks subitems = map (\(sitem, j) ->
+				mkLink sitem sitem ! Classes [if j == sactive then "menuactive" else "menuinactive", "submenu"])
+			(zip subitems [0..])
+
+		spans = map (\(all@(item:subitems), i) -> span </>
+				if i == active
+					then (mkLink item (getLink all) ! Class "menuactive") : mkSublinks subitems
+					else [mkLink item (getLink all) ! Class "menuinactive"])
 			(zip items [0..])
 
 site :: Int -> Int -> Tag -> IO ()

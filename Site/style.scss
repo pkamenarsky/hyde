@@ -67,7 +67,7 @@ body {
 
 	margin-top: 5px;
 	
-	@include font(14px);
+	@include font(13px);
 //	font-weight: bold;
 //	text-align: right;
 //	line-height: $leading * 1.5;
@@ -79,6 +79,8 @@ body {
 
 .submenu {
 	font-size: 11px;
+	display: block;
+	width: 1px;
 }
 
 #menuline {
