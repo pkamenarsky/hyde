@@ -1,4 +1,4 @@
-module Global.Site where
+module Global.Site (site, title) where
 
 import Prelude hiding (div, span)
 import HTML
@@ -36,8 +36,10 @@ menu active sactive = div ! Id "menu" </> (div ! Id "menuline") :
 					else [mkLink item (getLink all) ! Class "menuinactive"])
 			(zip items [0..])
 
+pagetitle = ("harmonious software - " ++) . head . (items !!)
+
 site :: Int -> Int -> Tag -> IO ()
-site active subactive content = html (head $ items !! active) HTML5 [CSS $ URL "style.css"] $ body </>
+site active subactive content = html (pagetitle active)  HTML5 [CSS $ URL "style.css"] $ body </>
 	[
 	-- vGrid 21 30,
 	imgLink (resources <+> "logo.png") home ! Id "logo",
