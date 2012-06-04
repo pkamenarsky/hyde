@@ -127,8 +127,8 @@ body {
 	position: absolute;
 	top: 50%;
 	left: 0px;
-	margin-top: -3px;
-	margin-left: -12px - $margin * 2 
+	margin-top: -17px;
+	margin-left: -21px - $margin * 2.5;
 }
 
 .pitch-title {
@@ -136,7 +136,7 @@ body {
 
 	// font-weight: bold;
 
-	margin-left: 2 * $margin;
+	// margin-left: 2 * $margin;
 	padding-top: 9px;
 	margin-bottom: 1 * $leading - 7px; // baseline fix + empty line
 }
@@ -146,7 +146,7 @@ body {
 	@include font(13px);
 
 	padding-top: 7px;
-	margin-left: 2 * $margin;
+	margin-left: 2.5 * $margin;
 	margin-bottom: -9px; // baseline fix
 	text-align: justify;
 }
