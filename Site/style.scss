@@ -62,7 +62,7 @@ body {
 #menu {
 	@include centered;
 
-	margin-top: $leading;
+	margin-top: 4 * $leading + 4px;
 	margin-left: $width / -2 - 2 * $column - $margin;
 	width: 2 * $column;
 	
