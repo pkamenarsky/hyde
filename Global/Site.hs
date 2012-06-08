@@ -13,7 +13,7 @@ resources = up <+> "resources"
 
 -- Menu
 
-items = [["About Us"], ["Process", "Planning", "Development", "Maintenance"], ["Clients"], ["Team"], ["Contact"]]
+items = [["About Us"], ["Process", "Specs", "Development", "Maintenance"], ["Clients"], ["Team"], ["Contact"]]
 
 -- Content
 
@@ -45,5 +45,4 @@ site active subactive content = html (pagetitle active)  HTML5 [CSS $ URL "style
 	imgLink (resources <+> "logo.png") home ! Id "logo",
 	div ! Id "main" </>
 		[menu active subactive,
-		div ! Id "main-bg",
 		content]]

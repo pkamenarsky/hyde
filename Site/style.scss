@@ -5,9 +5,9 @@ $margin: 20px;
 $column: $colw + $margin;
 
 $fcolor: #555555;
-$width: 9 * ($colw + $margin);
+$width: 8 * ($colw + $margin);
 $leading: 21px;
-$vsplit: $leading * 12;
+$vsplit: $leading * 11;
 
 // Mixins
 
@@ -37,22 +37,48 @@ body {
 #logo {
 	@include centered;
 	width: auto;
-	margin-left: $width / -2;
+	margin-left: $width / -2 - $colw;
 
 	top: 5 * $leading;
 }
 
-#main-bg {
+#areas {
 	position: absolute;
 	width: 100%;
 	height: 100%;
+}
 
-	opacity: 0.55;
-//	background-color: #ffffff;
+.area {
+	margin-top: 3 * $leading;
+	position: relative;
+	float: left;
+	width: ($width - 3 * $margin) / 3 - 2px;
+	
+	@include font(13px);
+//	text-align: center;
+}
 
-//	border-style: solid;
-	border-width: 1px;
-	border-color: #dddddd;
+.area-margin {
+	float: left;
+	width: $margin * 1.5;
+}
+
+.area-title {
+	margin-top: 7px;
+	margin-bottom: 2px + 1 * $leading;
+	font-size: 16px;
+//	font-weight: bold;
+}
+
+.area-copy {
+	text-align: left;
+}
+
+.area-icon {
+	position: absolute;
+	left: 50%;
+	margin-left: -21px;
+	top: -3 * $leading;
 }
 
 #main {
@@ -63,7 +89,7 @@ body {
 #menu {
 	position: absolute;
 	right: 0px;
-	top: -5 * $leading;
+	top: -4 * $leading;
 
 	margin-top: 5px;
 	
@@ -110,7 +136,7 @@ body {
 	position: relative;
 	@include font(21px);
 
-	margin-left: $colw;
+//	margin-left: $colw;
 	margin-top: $leading * 2 - 2px; // -2px baseline fix
 	margin-bottom: 2 * $leading;
 	line-height: $leading * 1.5;
@@ -119,7 +145,7 @@ body {
 
 .pitch {
 	position: relative;
-	margin-left: $colw;
+//	margin-left: $colw;
 	margin-bottom: 2 * $leading;
 }
 
@@ -146,7 +172,7 @@ body {
 	@include font(13px);
 
 	padding-top: 7px;
-	margin-left: 2.5 * $margin;
+//	margin-left: 2.5 * $margin;
 	margin-bottom: -9px; // baseline fix
 	text-align: justify;
 }
