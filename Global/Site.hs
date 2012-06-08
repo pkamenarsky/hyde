@@ -1,4 +1,4 @@
-module Global.Site (site, title, resources) where
+module Global.Site (site, title, resources, pitch, titledPitch) where
 
 import Prelude hiding (div, span)
 import HTML
@@ -18,6 +18,18 @@ items = [["About Us"], ["Process", "Specs", "Development", "Maintenance"], ["Cli
 -- Content
 
 title title = divText title ! Id "title"
+
+pitch icon copy = div ! Class "pitch" </>
+	[divText copy ! Class "pitch-copy" </>
+	--	[img (resources <+> icon) ! Class "pitch-icon"]
+		[]
+		]
+
+titledPitch icon title copy = div ! Class "pitch" </>
+	[divText title ! Class "pitch-title",
+	divText copy ! Class "pitch-copy" </>
+		[img (resources <+> icon) ! Class "pitch-icon"]]
+
 
 menu active sactive = div ! Id "menu" </> (div ! Id "menuline") :
 	intersperse (text "&nbsp;-&nbsp;") spans where

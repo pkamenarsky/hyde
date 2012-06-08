@@ -177,3 +177,21 @@ body {
 	text-align: justify;
 }
 
+// Clients
+
+.client-logo {
+	float: left;
+//	border: solid 1px #dedede;
+}
+
+.client-text {
+	@include font(13px);
+	width: 4 * $column - $margin - 2px;
+	margin-left: $margin;
+	float: left;
+}
+
+// Contact
+.contact-text {
+	@include font(13px);
+}

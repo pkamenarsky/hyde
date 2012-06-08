@@ -5,17 +5,6 @@ import Global.Site
 import Prelude hiding (div)
 import HTML
 
-pitch icon copy = div ! Class "pitch" </>
-	[divText copy ! Class "pitch-copy" </>
-	--	[img (resources <+> icon) ! Class "pitch-icon"]
-		[]
-		]
-
-titledPitch icon title copy = div ! Class "pitch" </>
-	[divText title ! Class "pitch-title",
-	divText copy ! Class "pitch-copy" </>
-		[img (resources <+> icon) ! Class "pitch-icon"]]
-
 area icon title copy = div ! Class "area" </>
 	[divText title ! Class "area-title",
 	divText copy ! Class "area-copy",
@@ -34,8 +23,8 @@ main = do
 		-- titledPitch (URL "icon_backend.png") "Robust, fault tolerant backend services" "It pays to do things right the first time; unnecessary changes are ex&shy;pensive. It has been shown that a change in the early stages of a project, in requirements or architecture, costs 50 to 200 times less than the same change later, in construction or maintenance. This is common sense, but we have far too often seen projects slip through deadlines because of this, resulting in unstable releases, feature cuts, unfulfilled promises and angry customers.",
 		-- titledPitch (URL "icon_frontend.png") "Natural, intuitive user facing applications" "It pays to do things right the first time; unnecessary changes are ex&shy;pensive. It has been shown that a change in the early stages of a project, in requirements or architecture, costs 50 to 200 times less than the same change later, in construction or maintenance. This is common sense, but we have far too often seen projects slip through deadlines because of this, resulting in unstable releases, feature cuts, unfulfilled promises and angry customers."
 		div ! Id "areas" </>
-			[area "main_planning.png" "Requirements" "When building a backend sys&shy;tem we aim for stability, main&shy;tain&shy;abili&shy;ty, precise error repor&shy;ting and efficient procedures for iden&shy;tifying and removing system faults.",
+			[area "main_planning.png" "Web applications" "When building a backend sys&shy;tem we aim for stability, main&shy;tain&shy;abili&shy;ty, precise error repor&shy;ting and efficient procedures for iden&shy;tifying and removing system faults.",
 			text "&nbsp" ! Class "area-margin",
-			area "main_planning.png" "Backend platforms" "When building a backend sys&shy;tem we aim for stability, main&shy;tain&shy;abili&shy;ty, precise error reporting and efficient procedures for identifying and removing system faults.",
+			area "main_planning.png" "Backend services" "When building a backend sys&shy;tem we aim for stability, main&shy;tain&shy;abili&shy;ty, precise error reporting and efficient procedures for identifying and removing system faults.",
 			text "&nbsp" ! Class "area-margin",
 			area "main_planning.png" "UX design" "When building a backend sys&shy;tem we aim for stability, main&shy;tain&shy;abili&shy;ty, precise error reporting and efficient procedures for identifying and removing system faults."]]
