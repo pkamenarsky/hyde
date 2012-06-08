@@ -9,5 +9,5 @@ main = do
 	copy <- readFile "Global/dev1.html"
 
 	site 1 0 $ div </>
-		[title "It pays to do things right the first time.",
+		[title "It pays to do things right the first time",
 		pitch "" copy]

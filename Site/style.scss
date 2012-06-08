@@ -180,6 +180,7 @@ body {
 // Clients
 
 .client-logo {
+	padding-top: 7px;
 	float: left;
 //	border: solid 1px #dedede;
 }
@@ -189,9 +190,11 @@ body {
 	width: 4 * $column - $margin - 2px;
 	margin-left: $margin;
 	float: left;
+	padding-top: 7px;
 }
 
 // Contact
 .contact-text {
+	padding-top: 7px;
 	@include font(13px);
 }
