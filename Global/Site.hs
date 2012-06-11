@@ -1,8 +1,9 @@
-module Global.Site (site, title, resources, pitch, titledPitch) where
+module Global.Site (site, title, resources, pitch, pitchCopy, titledPitch) where
 
 import Prelude hiding (div, span)
 import HTML
 import Data.Char
+import Data.String.Utils
 import List hiding (span)
 
 -- Globals
@@ -17,19 +18,23 @@ items = [["About Us"], ["Process", "Specs", "Development", "Maintenance"], ["Cli
 
 -- Content
 
+format = (replace "*-" "&shy;") . (replace "--" "&mdash;")
+
 title title = divText title ! Id "title"
 
 pitch icon copy = div ! Class "pitch" </>
-	[divText copy ! Class "pitch-copy" </>
-	--	[img (resources <+> icon) ! Class "pitch-icon"]
-		[]
+	[divText (format copy) ! Class "pitch-copy" </>
+		[img (resources <+> icon) ! Class "pitch-icon"]
+	--	[]
 		]
+
+pitchCopy copy = div ! Class "pitch" </>
+	[divText (format copy) ! Class "pitch-copy"]
 
 titledPitch icon title copy = div ! Class "pitch" </>
 	[divText title ! Class "pitch-title",
-	divText copy ! Class "pitch-copy" </>
+	divText (format copy) ! Class "pitch-copy" </>
 		[img (resources <+> icon) ! Class "pitch-icon"]]
-
 
 menu active sactive = div ! Id "menu" </> (div ! Id "menuline") :
 	intersperse (text "&nbsp;-&nbsp;") spans where

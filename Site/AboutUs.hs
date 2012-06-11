@@ -14,9 +14,9 @@ main = do
 	copy <- readFile "Global/philosophy.html"
 
 	site 0 0 $ div </>
-		[title "Reliable software development.",
+		[title "Reliable software development",
 		-- title "We create reliable software platforms that are both intuitive and easy to maintain.",
-		pitch (URL "icon_philosophy.png") "Building operational software on time is a difficult task &mdash; we have seen many projects culminate in mis&shy;behaving systems, dysfunctional user interfaces, blown budgets and broken promises. Blind faith in out&shy;dated man&shy;agement procedures, insufficient evaluation of available technologies and no routines set in place for error analysis are some of the reasons that lead to such state of affairs.<br><br>We try to do better.",
+		pitchCopy "Building operational software on time is a difficult task &mdash; we have seen many projects culminate in mis&shy;behaving systems, dysfunctional user interfaces, blown budgets and broken promises. Blind faith in out&shy;dated man&shy;agement procedures, insufficient evaluation of available technologies and no routines set in place for error analysis are some of the reasons that lead to such state of affairs.<br><br>We try to do better.",
 		div ! Id "areas" </>
 			[area "main_planning.png" "Web & native" "When developing user facing programs, be it for the web or a specific platform, we concen&shy;trate on usability and user expe&shy;ri&shy;ence; easy software results in satisfied users, higher efficiency and lower support costs.",
 			text "&nbsp" ! Class "area-margin",

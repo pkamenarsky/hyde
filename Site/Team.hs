@@ -7,4 +7,4 @@ import HTML
 
 main = do
 	site 3 0 $ div </>
-		[title "Our team."]
+		[title "Our team"]

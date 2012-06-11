@@ -78,7 +78,7 @@ body {
 	position: absolute;
 	left: 50%;
 	margin-left: -21px;
-	top: -3 * $leading;
+	top: -3 * $leading - 2px;
 }
 
 #main {
