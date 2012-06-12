@@ -18,7 +18,7 @@ items = [["About Us"], ["Process", "Specs", "Development", "Maintenance"], ["Cli
 
 -- Content
 
-format = (replace "*-" "&shy;") . (replace "--" "&mdash;")
+format = (replace "*-" "&shy;") . (replace "--" "&mdash;") . (replace "***" "&nbsp;&nbsp;&nbsp;")
 
 title title = divText title ! Id "title"
 
