@@ -30,6 +30,7 @@ $vsplit: $leading * 11;
 
 body {
 //	background: -moz-radial-gradient(top, ellipse cover, #ffffff 0%, #e6e6e6 100%); /* FF3.6+ */
+	overflow-y: scroll;
 	
 	background-image: url("../resources/bg.jpg");
 	background-position: center top;
