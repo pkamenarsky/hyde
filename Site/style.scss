@@ -26,6 +26,16 @@ $vsplit: $leading * 11;
 //	text-align: justify;
 }
 
+@mixin font-normal($size) {
+	@include font($size);
+	font-family: "HelveticaNeue", "Helvetica Neue", "HelveticaNeueRoman", "HelveticaNeue-Roman", "Helvetica Neue Roman", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif; font-weight:400; font-stretch:normal;
+}
+
+@mixin font-light($size) {
+	@include font($size);
+	font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif; font-weight:300; font-stretch:normal;
+}
+
 // Layout
 
 body {
@@ -72,8 +82,7 @@ body {
 .area-title {
 	margin-top: 7px;
 	margin-bottom: 2px + 1 * $leading;
-	font-size: 16px;
-//	font-weight: bold;
+	@include font(16px);
 }
 
 .area-copy {
@@ -100,9 +109,6 @@ body {
 	margin-top: 5px;
 	
 	@include font(13px);
-//	font-weight: bold;
-//	text-align: right;
-//	line-height: $leading * 1.5;
 }
 
 #menu span {
@@ -140,7 +146,7 @@ body {
 
 #title {
 	position: relative;
-	@include font(21px);
+	@include font-light(21px);
 
 //	margin-left: $colw;
 	margin-top: $leading * 2 - 2px; // -2px baseline fix
