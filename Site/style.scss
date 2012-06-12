@@ -29,7 +29,12 @@ $vsplit: $leading * 11;
 // Layout
 
 body {
-	background-color: #f5f5f5;
+//	background: -moz-radial-gradient(top, ellipse cover, #ffffff 0%, #e6e6e6 100%); /* FF3.6+ */
+	
+	background-image: url("../resources/bg.jpg");
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-color: #e6e6e6;
 	margin: 0px;
 	padding: 0px;
 }
