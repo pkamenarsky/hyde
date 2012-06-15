@@ -22,4 +22,5 @@ main = do
 			text "&nbsp" ! Class "area-margin",
 			area "main_planning.png" "Backend services" "On the backend side we aim for stability, maintainability and pre&shy;cise error reporting; efficient pro&shy;cedures for monitoring service state and identifying and re&shy;mov&shy;ing system faults are equally as important.",
 			text "&nbsp" ! Class "area-margin",
-			area "main_planning.png" "UX design" "Overloaded user interfaces only lead to confusion and human error; we strive for clean, pleas&shy;ing and logical UIs precisely tai&shy;lored to the specific project do&shy;main, input methods and device restrictions."]]
+			area "main_planning.png" "3D programming" "Overloaded user interfaces only lead to confusion and human error; we strive for clean, pleas&shy;ing and logical UIs precisely tai&shy;lored to the specific project do&shy;main, input methods and device restrictions."]]
+
