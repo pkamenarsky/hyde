@@ -229,6 +229,22 @@ body {
 	padding-top: 7px;
 }
 
+// Team
+
+.team-logo {
+	margin-top: 7px;
+	float: left;
+	border: solid 1px #cdcdcd;
+}
+
+.team-text {
+	@include font(13px);
+	width: 5 * $column - 2px;
+	margin-left: $margin * 2;
+	float: left;
+	padding-top: 7px;
+}
+
 // Contact
 .contact-text {
 	padding-top: 7px;
