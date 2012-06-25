@@ -65,48 +65,10 @@ body {
 	top: 5 * $leading;
 }
 
-#areas {
-	width: 100%;
-	height: 100%;
-}
-
-.area {
-	position: relative;
-
-	margin-top: 3 * $leading;
-	margin-bottom: 2 * $leading;
-	float: left;
-	width: ($width - 3 * $margin) / 3 - 2px;
-	
-	@include font(13px);
-//	text-align: center;
-}
-
-.area-margin {
-	float: left;
-	width: $margin * 1.5;
-}
-
-.area-title {
-	margin-top: 7px;
-	margin-bottom: 2px + 1 * $leading;
-	@include font(16px);
-}
-
-.area-copy {
-	text-align: left;
-}
-
-.area-icon {
-	position: absolute;
-	left: 50%;
-	margin-left: -21px;
-	top: -3 * $leading - 2px;
-}
-
 #main {
 	@include centered;
 	top: $vsplit;
+	padding-bottom: 5 * $leading;
 }
 
 #menu {
@@ -156,6 +118,49 @@ body {
 	color: $fcolor;
 }
 
+// About Us
+
+#areas {
+	width: 100%;
+	height: 100%;
+}
+
+.area {
+	position: relative;
+
+	margin-top: 3 * $leading;
+	margin-bottom: 2 * $leading;
+	float: left;
+	width: ($width - 3 * $margin) / 3 - 2px;
+	
+	@include font(13px);
+//	text-align: center;
+}
+
+.area-margin {
+	float: left;
+	width: $margin * 1.5;
+}
+
+.area-title {
+	margin-top: 7px;
+	margin-bottom: 2px + 1 * $leading;
+	@include font(16px);
+}
+
+.area-copy {
+	text-align: left;
+}
+
+.area-icon {
+	position: absolute;
+	left: 50%;
+	margin-left: -21px;
+	top: -3 * $leading - 2px;
+}
+
+// Copy
+
 #title {
 	position: relative;
 	@include font-light(21px);
@@ -173,24 +178,12 @@ body {
 	margin-bottom: 2 * $leading;
 }
 
-.pitch-separator {
-	position: absolute;
-
-	width: 5px;
-	height: 5px;
-	left: 50%;
-	bottom: -$leading - 2px;
-
-	background-image: url("../resources/dot.png");
-	background-repeat: no-repeat;
-}
-
 .pitch-icon {
 	position: absolute;
-	top: 50%;
+	top: 0px;
 	left: 0px;
-	margin-top: -17px;
-	margin-left: -21px - $margin * 2.5;
+	margin-top: 0px;
+	margin-left: -$column - $margin;
 }
 
 .pitch-title {
@@ -209,8 +202,31 @@ body {
 
 	padding-top: 7px;
 //	margin-left: 2.5 * $margin;
-	margin-bottom: -9px; // baseline fix
+	margin-bottom: -7px; // baseline fix
 	text-align: justify;
+}
+
+.pitch-indented {
+	margin-left: $column;
+}
+
+.footnote {
+	@include font(9px);
+
+	position: absolute;
+
+	margin-top: 2px;
+	padding-top: 5px;
+}
+
+.footnote-line {
+	position: absolute;
+
+	top: 0px;
+	left: 0px;
+	width: 2 * $column;
+
+	border-top: solid 1px #999999;
 }
 
 // Clients

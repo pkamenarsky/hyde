@@ -1,4 +1,4 @@
-module Global.Site (site, title, title2, resources, pitch, pitchCopy, titledPitch) where
+module Global.Site (site, title, title2, resources, pitch, pitchCopy, titledPitch, footnote) where
 
 import Prelude hiding (div, span)
 import HTML
@@ -24,11 +24,8 @@ title title = divText title ! Id "title"
 title2 title = divText title ! Class "pitch-title"
 
 pitch icon copy = div ! Class "pitch" </>
-	[divText (format copy) ! Class "pitch-copy" </>
-		[img (resources <+> icon) ! Class "pitch-icon",
-		div ! Class "pitch-separator"]
-	--	[]
-		]
+	[divText (format copy) ! Classes ["pitch-copy", "pitch-indented"] </>
+		[img (resources <+> icon) ! Class "pitch-icon"]]
 
 pitchCopy copy = div ! Class "pitch" </>
 	[divText (format copy) ! Class "pitch-copy"]
@@ -37,6 +34,9 @@ titledPitch icon title copy = div ! Class "pitch" </>
 	[divText title ! Class "pitch-title",
 	divText (format copy) ! Class "pitch-copy" </>
 		[img (resources <+> icon) ! Class "pitch-icon"]]
+
+footnote note = divText note ! Class "footnote" </>
+	[div ! Class "footnote-line"]
 
 menu active sactive = div ! Id "menu" </> (div ! Id "menuline") :
 	intersperse (divText "&nbsp;-&nbsp;") spans where
@@ -58,7 +58,7 @@ menu active sactive = div ! Id "menu" </> (div ! Id "menuline") :
 pagetitle = ("harmonious software - " ++) . head . (items !!)
 
 site :: Int -> Int -> Tag -> IO ()
-site active subactive content = html (pagetitle active)  HTML5 [CSS $ URL "style.css"] $ body </>
+site active subactive content = html (pagetitle active) HTML5 [CSS $ URL "style.css"] $ body </>
 	[div ! Id "bg" </>
 		[
 		-- vGrid 21 30,
